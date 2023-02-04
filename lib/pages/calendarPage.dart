@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lol_blackbox/controller/calenderController.dart';
 import 'package:lol_blackbox/controller/initEvent.dart';
 
 import '../components/palette.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class CalenderPage extends StatelessWidget {
+  const CalenderPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     initEventController init = Get.put(initEventController());
+    CalenderController calender = Get.put(CalenderController());
     print(init.days);
+    print(init.minIdx);
+    print(init.maxIdx);
+    print("adsadadadsads");
     var level = 1;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -275,119 +280,110 @@ class LoginPage extends StatelessWidget {
           const SizedBox(
         height: 3,
           ),
-        GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: init.days.length, //item 개수
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 7, //1 개의 행에 보여줄 item 개수
-              mainAxisSpacing: 10, //수평 Padding
-            ),
-            itemBuilder: (BuildContext context, int index) {
-              return Obx(() =>  GestureDetector(
-                onTap: () => {
-                  for (var i = 0 ; i<init.days.length; i++){
-                    init.days[i]['picked'].value = false
-                  },
-                  init.days[index]['picked'].value = true,
-                  init.dayIdx.value = index
-                },
-                onHorizontalDragStart: (detail){
-                  print("드래그1 ${index}");
-                  print("드래그1 ${detail}");
-                },
-                onHorizontalDragEnd: (detail){
-                  print("드래그2 ${index}");
-                  print("드래그2 ${detail}");
-                },
-                child: Stack(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.only(
-                          bottom: 30),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          width: 1.1,
-                          color: init.days[index]["inMonth"] &&
-                              init.days[index]["picked"].value
-                              ? Colors.grey
-                              : Colors.white,
+        Listener(
+          onPointerDown: calender.detectTapedItem,
+          onPointerMove: calender.detectTapedItem,
+          onPointerUp: calender.clearSelection,
+          child:GridView.builder(
+              key: calender.key,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: init.days.length, //item 개수
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 7, //1 개의 행에 보여줄 item 개수
+                mainAxisSpacing: 5, //수평 Padding
+              ),
+              itemBuilder: (BuildContext context, int index) {
+                return Obx(() => Foo(
+                  index : index,
+                  child: Stack(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(
+                            bottom: 30),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 1.1,
+                            color: calender.asdf.contains(index) && calender.screenList.isEmpty
+                                ? Colors.grey
+                                : calender.asdf.isEmpty && calender.screenList.contains(index) ? Colors.grey
+                                : Colors.white,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.white,
                         ),
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.white,
-                      ),
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Column(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.only(
-                                  right: 6, left: 6, bottom: 2),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: init.days[index]["isToday"]
-                                    ? Colors.black
-                                    : Colors.white,
-                              ),
-                              child: Text(
-                                init.days[index]["day"].toString(),
-                                style: TextStyle(
-                                  color: init.days[index]["inMonth"] &&
-                                      init.days[index]["isToday"]
-                                      ? Colors.white
-                                      : init.days[index]["inMonth"]
+                        child: Align(
+                          alignment: Alignment.topCenter,
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.only(
+                                    right: 6, left: 6, bottom: 2),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: init.days[index]["isToday"]
                                       ? Colors.black
-                                      : Colors.grey,
+                                      : Colors.white,
+                                ),
+                                child: Text(
+                                  init.days[index]["day"].toString(),
+                                  style: TextStyle(
+                                    color: init.days[index]["inMonth"] &&
+                                        init.days[index]["isToday"]
+                                        ? Colors.white
+                                        : init.days[index]["inMonth"]
+                                        ? Colors.black
+                                        : Colors.grey,
+                                  ),
                                 ),
                               ),
-                            ),
 
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    init.days[index]["inMonth"] && init.days[index]['Day'].value == true ?
-                    Container(
-                      margin: const EdgeInsets.only(top: 25),
-                      width: Get.width / 7,
-                      height: 8,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: init.days[index]["inMonth"] ? Colors.blue : Colors.blue
-                      ),
-                    ) : init.days[index]["inMonth"] && init.days[index]['Evening'].value == true ?
-                    Container(
-                      margin: const EdgeInsets.only(top: 25),
-                      width: Get.width / 7,
-                      height: 8,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: init.days[index]["inMonth"] ? Palette.mainColor : Colors.blue
-                      ),
-                    ) : init.days[index]["inMonth"] && init.days[index]['Night'].value == true ?
-                    Container(
-                      margin: const EdgeInsets.only(top: 25),
-                      width: Get.width / 7,
-                      height: 8,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: init.days[index]["inMonth"] ? Palette.greyColor4 : Colors.blue
-                      ),
-                    ) : init.days[index]["inMonth"] && init.days[index]['Off'].value == true ?
-                    Container(
-                      margin: const EdgeInsets.only(top: 25),
-                      width: Get.width / 7,
-                      height: 8,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: init.days[index]["inMonth"] ? Palette.greyColor2 : Colors.blue
-                      ),
-                    ) : Container(width: 0,)
-                  ],
-                ),
-              ));
-            }
-          ),
+                      init.days[index]["inMonth"] && init.days[index]['Day'].value == true ?
+                      Container(
+                        margin: const EdgeInsets.only(top: 25),
+                        width: Get.width / 7,
+                        height: 8,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: init.days[index]["inMonth"] ? Colors.blue : Colors.blue
+                        ),
+                      ) : init.days[index]["inMonth"] && init.days[index]['Evening'].value == true ?
+                      Container(
+                        margin: const EdgeInsets.only(top: 25),
+                        width: Get.width / 7,
+                        height: 8,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: init.days[index]["inMonth"] ? Palette.mainColor : Colors.blue
+                        ),
+                      ) : init.days[index]["inMonth"] && init.days[index]['Night'].value == true ?
+                      Container(
+                        margin: const EdgeInsets.only(top: 25),
+                        width: Get.width / 7,
+                        height: 8,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: init.days[index]["inMonth"] ? Palette.greyColor4 : Colors.blue
+                        ),
+                      ) : init.days[index]["inMonth"] && init.days[index]['Off'].value == true ?
+                      Container(
+                        margin: const EdgeInsets.only(top: 25),
+                        width: Get.width / 7,
+                        height: 8,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: init.days[index]["inMonth"] ? Palette.greyColor2 : Colors.blue
+                        ),
+                      ) : Container(width: 0,)
+                    ],
+                  )));
+              }
+            ),
+        ),
           Container(
         height: 1,
         margin: const EdgeInsets.only(top: 10),
@@ -399,126 +395,157 @@ class LoginPage extends StatelessWidget {
               // init.days[init.dayIdx.value]['inMonth'] && init.days[init.dayIdx.value]['Day'].value ?
               Column(
                 children: [
-                  Container(
-                      width: Get.width,
-                      height: 40,
-                      margin: const EdgeInsets.only(top: 20, left: 21, right: 21),
-                      decoration: BoxDecoration(border:
-                      Border.all(color: Colors.black)),
-                      child:GestureDetector(
-                        onTap: () => {
-                          if (init.days[init.dayIdx.value]['Day'].value){
-                            init.days[init.dayIdx.value]['Day'].value = false,
-                            init.days[init.dayIdx.value]['Evening'].value = false,
-                            init.days[init.dayIdx.value]['Night'].value = false,
-                            init.days[init.dayIdx.value]['Off'].value = false,
-                          }
-                          else{
-                            init.days[init.dayIdx.value]['Evening'].value = false,
-                            init.days[init.dayIdx.value]['Night'].value = false,
-                            init.days[init.dayIdx.value]['Off'].value = false,
-                            init.days[init.dayIdx.value]['Day'].value = true,
-                          }
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black),
-                            color: init.days[init.dayIdx.value]['Day'].value ?  Colors.blue : Palette.greyColor4
-                          ),
-                          alignment: Alignment.center,
-                          child: const Text("Day"),
-                        ),
-                      )),
-                  Container(
-                      width: Get.width,
-                      height: 40,
-                      margin: const EdgeInsets.only(top: 20, left: 21, right: 21),
-                      decoration: BoxDecoration(border:
-                      Border.all(color: Colors.black)),
-                      child:GestureDetector(
-                        onTap: () => {
-                          if (init.days[init.dayIdx.value]['Evening'].value){
-                            init.days[init.dayIdx.value]['Day'].value = false,
-                            init.days[init.dayIdx.value]['Evening'].value = false,
-                            init.days[init.dayIdx.value]['Night'].value = false,
-                            init.days[init.dayIdx.value]['Off'].value = false,
-                          }
-                          else{
-                            init.days[init.dayIdx.value]['Day'].value = false,
-                            init.days[init.dayIdx.value]['Night'].value = false,
-                            init.days[init.dayIdx.value]['Off'].value = false,
-                            init.days[init.dayIdx.value]['Evening'].value = true,
-                          }
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black),
-                              color: init.days[init.dayIdx.value]['Evening'].value ? Palette.subColor1 : Palette.greyColor4
-                          ),
-                          alignment: Alignment.center,
-                          child: const Text("Evening"),
-                        ),
-                      )),
-                  Container(
-                      width: Get.width,
-                      height: 40,
-                      margin: const EdgeInsets.only(top: 20, left: 21, right: 21),
-                      decoration: BoxDecoration(border:
-                      Border.all(color: Colors.black)),
-                      child:GestureDetector(
-                        onTap: () => {
-                          if (init.days[init.dayIdx.value]['Night'].value){
-                            init.days[init.dayIdx.value]['Day'].value = false,
-                            init.days[init.dayIdx.value]['Evening'].value = false,
-                            init.days[init.dayIdx.value]['Night'].value = false,
-                            init.days[init.dayIdx.value]['Off'].value = false,
-                          }
-                          else{
-                            init.days[init.dayIdx.value]['Day'].value = false,
-                            init.days[init.dayIdx.value]['Evening'].value = false,
-                            init.days[init.dayIdx.value]['Off'].value = false,
-                            init.days[init.dayIdx.value]['Night'].value = true,
-                          }
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black),
-                              color: init.days[init.dayIdx.value]['Night'].value ?  Palette.greyColor3 : Palette.greyColor4
-                          ),
-                          alignment: Alignment.center,
-                          child: const Text("Night"),
-                        ),
-                      )),
-                  Container(
-                      width: Get.width,
-                      height: 40,
-                      margin: const EdgeInsets.only(top: 20, left: 21, right: 21),
-                      decoration: BoxDecoration(border:
-                      Border.all(color: Colors.black)),
-                      child:GestureDetector(
-                        onTap: () => {
-                          if (init.days[init.dayIdx.value]['Off'].value){
-                            init.days[init.dayIdx.value]['Day'].value = false,
-                            init.days[init.dayIdx.value]['Evening'].value = false,
-                            init.days[init.dayIdx.value]['Night'].value = false,
-                            init.days[init.dayIdx.value]['Off'].value = false,
-                          }
-                          else{
-                            init.days[init.dayIdx.value]['Evening'].value = false,
-                            init.days[init.dayIdx.value]['Night'].value = false,
-                            init.days[init.dayIdx.value]['Day'].value = false,
-                            init.days[init.dayIdx.value]['Off'].value = true,
-                          }
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black),
-                              color: init.days[init.dayIdx.value]['Off'].value ?  Colors.blue : Palette.greyColor4
-                          ),
-                          alignment: Alignment.center,
-                          child: const Text("Off"),
-                        ),
-                      )),
+                  !(init.dayIdx.value > init.maxIdx || init.dayIdx.value < init.minIdx) ?
+                      Column(
+                        children: [
+                          Container(
+                              width: Get.width,
+                              height: 40,
+                              margin: const EdgeInsets.only(top: 20, left: 21, right: 21),
+                              decoration: BoxDecoration(border:
+                              Border.all(color: Colors.black)),
+                              child:GestureDetector(
+                                onTap: () => {
+                                  if (init.dayIdx.value >init.maxIdx || init.dayIdx.value <init.minIdx){
+
+                                  }
+                                  else{
+                                    if (init.days[init.dayIdx.value]['Day'].value){
+                                      init.days[init.dayIdx.value]['Day'].value = false,
+                                      init.days[init.dayIdx.value]['Evening'].value = false,
+                                      init.days[init.dayIdx.value]['Night'].value = false,
+                                      init.days[init.dayIdx.value]['Off'].value = false,
+                                    }
+                                    else{
+                                      init.days[init.dayIdx.value]['Evening'].value = false,
+                                      init.days[init.dayIdx.value]['Night'].value = false,
+                                      init.days[init.dayIdx.value]['Off'].value = false,
+                                      init.days[init.dayIdx.value]['Day'].value = true,
+                                    }
+                                  }
+                                },
+                                child: !(init.dayIdx.value > init.maxIdx || init.dayIdx.value < init.minIdx) ?
+                                Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.black),
+                                      color:
+                                      init.days[init.dayIdx.value]['Day'].value ?  Colors.blue : Palette.greyColor4
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: const Text("Day"),
+                                ) : Container(width: 0,)
+                              )),
+                          Container(
+                              width: Get.width,
+                              height: 40,
+                              margin: const EdgeInsets.only(top: 20, left: 21, right: 21),
+                              decoration: BoxDecoration(border:
+                              Border.all(color: Colors.black)),
+                              child:GestureDetector(
+                                onTap: () => {
+                                  if (init.dayIdx.value >init.maxIdx || init.dayIdx.value <init.minIdx){
+
+                                  }
+                                  else{
+                                    if (init.days[init.dayIdx.value]['Evening'].value){
+                                      init.days[init.dayIdx.value]['Day'].value = false,
+                                      init.days[init.dayIdx.value]['Evening'].value = false,
+                                      init.days[init.dayIdx.value]['Night'].value = false,
+                                      init.days[init.dayIdx.value]['Off'].value = false,
+                                    }
+                                    else{
+                                      init.days[init.dayIdx.value]['Day'].value = false,
+                                      init.days[init.dayIdx.value]['Night'].value = false,
+                                      init.days[init.dayIdx.value]['Off'].value = false,
+                                      init.days[init.dayIdx.value]['Evening'].value = true,
+                                    }
+                                  }
+
+                                },
+                                child: !(init.dayIdx.value > init.maxIdx || init.dayIdx.value < init.minIdx) ?
+                                Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.black),
+                                      color: init.days[init.dayIdx.value]['Evening'].value ? Palette.subColor1 : Palette.greyColor4
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: const Text("Evening"),
+                                ) : Container(width: 0,)
+                              )),
+                          Container(
+                              width: Get.width,
+                              height: 40,
+                              margin: const EdgeInsets.only(top: 20, left: 21, right: 21),
+                              decoration: BoxDecoration(border:
+                              Border.all(color: Colors.black)),
+                              child:GestureDetector(
+                                onTap: () => {
+                                  if (init.dayIdx.value >init.maxIdx || init.dayIdx.value <init.minIdx){
+
+                                  }
+                                  else{
+                                    if (init.days[init.dayIdx.value]['Night'].value){
+                                      init.days[init.dayIdx.value]['Day'].value = false,
+                                      init.days[init.dayIdx.value]['Evening'].value = false,
+                                      init.days[init.dayIdx.value]['Night'].value = false,
+                                      init.days[init.dayIdx.value]['Off'].value = false,
+                                    }
+                                    else{
+                                      init.days[init.dayIdx.value]['Day'].value = false,
+                                      init.days[init.dayIdx.value]['Evening'].value = false,
+                                      init.days[init.dayIdx.value]['Off'].value = false,
+                                      init.days[init.dayIdx.value]['Night'].value = true,
+                                    }
+                                  }
+                                },
+                                child: !(init.dayIdx.value > init.maxIdx || init.dayIdx.value < init.minIdx) ?
+                                Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.black),
+                                      color: init.days[init.dayIdx.value]['Night'].value ?  Palette.greyColor3 : Palette.greyColor4
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: const Text("Night"),
+                                ) : Container(width: 0,)
+                              )),
+                          Container(
+                              width: Get.width,
+                              height: 40,
+                              margin: const EdgeInsets.only(top: 20, left: 21, right: 21),
+                              decoration: BoxDecoration(border:
+                              Border.all(color: Colors.black)),
+                              child:GestureDetector(
+                                onTap: () => {
+                                  if (init.dayIdx.value >init.maxIdx || init.dayIdx.value <init.minIdx){
+                                  }
+                                  else{
+                                    if (init.days[init.dayIdx.value]['Night'].value){
+                                      init.days[init.dayIdx.value]['Day'].value = false,
+                                      init.days[init.dayIdx.value]['Evening'].value = false,
+                                      init.days[init.dayIdx.value]['Night'].value = false,
+                                      init.days[init.dayIdx.value]['Off'].value = false,
+                                    }
+                                    else{
+                                      init.days[init.dayIdx.value]['Day'].value = false,
+                                      init.days[init.dayIdx.value]['Evening'].value = false,
+                                      init.days[init.dayIdx.value]['Off'].value = false,
+                                      init.days[init.dayIdx.value]['Night'].value = true,
+                                    }
+                                  }
+                                },
+                                child: !(init.dayIdx.value > init.maxIdx || init.dayIdx.value < init.minIdx) ?
+                                Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.black),
+                                      color: init.days[init.dayIdx.value]['Off'].value ?  Colors.blue : Palette.greyColor4
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: const Text("Off"),
+                                ) : Container(width: 0,)
+                              )),
+                        ],
+                      ) : Container()
+
                 ],
               )
             ],

@@ -7,7 +7,9 @@ class initEventController extends GetxController {
   RxInt year = 0.obs;
   RxInt month = 0.obs;
   RxList days = [].obs;
-  RxInt dayIdx = 0.obs;
+  int minIdx = 0;
+  int maxIdx = 0;
+  RxInt dayIdx = 0.obs; // 클릭한 날짜 인덱스
 
   @override
   void onInit() {
@@ -71,6 +73,21 @@ class initEventController extends GetxController {
     }
 
     days = [...days, ...temp].obs;
+
+    for (int i = 0 ; i<days.length; i++){
+      if (days[i]["inMonth"] == true){
+        minIdx = i;
+        break;
+      }
+    }
+    dayIdx.value = minIdx;
+
+    for (int i = 0 ; i<days.length; i++){
+      if (i>=15 && days[i]["inMonth"] == false && days[i-1]["inMonth"] == true){
+        maxIdx = i-1;
+        break;
+      }
+    }
   }
 }
 

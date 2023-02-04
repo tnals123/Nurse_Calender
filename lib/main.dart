@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lol_blackbox/pages/asdf.dart';
 import 'package:lol_blackbox/pages/calendarPage.dart';
 
 void main() async {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.white,
             titleTextStyle: TextStyle(color: Colors.black),
           )),
-      home: const LoginPage(),
+      home: const CalenderPage(),
       // initialRoute: "/",
       getPages: [
         GetPage(
