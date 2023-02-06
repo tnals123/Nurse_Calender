@@ -11,16 +11,30 @@ class CalenderController extends GetxController {
   int firstValue = 0;
   RxList asdf = [].obs;
   RxList screenList = [].obs; //실제 화면에 띄우기 위한 배열
+  int max = 0;
 
 
-  void selectIndex(int index) {
-    print("${index}zzzzz");
+  void selectIndex(int index, int smaller) {
     selectedIndexes.add(index);
+    asdf.add(index);
+    asdf.sort();
+    var preList = asdf.toSet();
+    asdf.clear();
+    for (int i = 0; i < preList.length; i++) {
+      asdf.add(preList.toList()[i]);
+    }
+    if (smaller != -1){
+      for (int i = 0; i <asdf.length; i++){
+        if (asdf[i] > smaller){
+          asdf.remove(asdf[i]);
+        }
+      }
+    }
     final selectLists = selectedIndexes.toList();
     selectLists.sort();
-    for (int i = 0; i < selectLists.length; i++) {
-      asdf.add(selectLists[i]);
-    }
+    // for (int i = 0; i < selectLists.length; i++) {
+    //   asdf.add(selectLists[i]);
+    // }
     if (index > Get.find<initEventController>().maxIdx || index < Get.find<initEventController>().minIdx){
       _trackTaped.clear();
       selectedIndexes.clear();
@@ -31,6 +45,7 @@ class CalenderController extends GetxController {
 
   void clearSelection(PointerEvent event) {
     print("이거임!!");
+    print(asdf);
     for (int i = 0; i < asdf.length; i++) {
       screenList.add(asdf[i]);
     }
@@ -49,16 +64,27 @@ class CalenderController extends GetxController {
         for (final hit in result.path) {
           final target = hit.target;
           if (target is _Foo && !_trackTaped.contains(target)) {
+            if (target.index > max){
+              print("dkd${max}");
+              max = target.index;
+            }
             if (_trackTaped.isEmpty) {
               firstValue = target.index;
-              selectIndex(target.index);
+              selectIndex(target.index , -1);
               Get.find<initEventController>().dayIdx.value = target.index;
               print(Get.find<initEventController>().dayIdx.value);
             }
             _trackTaped.add(target);
-            selectIndex(target.index);
-            for (var i = target.index - 1; i > firstValue; i--) {
-              selectIndex(i);
+            if (target.index < max){
+              print("작아요");
+              print(target.index);
+              selectIndex(target.index,target.index);
+            }
+            else{
+              selectIndex(target.index , -1);
+              for (var i = target.index - 1; i > firstValue; i--) {
+                selectIndex(i,-1);
+              }
             }
           }
 
