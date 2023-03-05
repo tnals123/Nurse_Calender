@@ -19,6 +19,7 @@ class CalenderController extends GetxController {
     final selectLists = selectedIndexes.toList();
     selectLists.sort();
     selectedIdx = selectLists.obs;
+    print(selectedIdx);
     for (int i = 0; i < selectLists.length; i++) {
       temporArr.add(selectLists[i]);
     }
@@ -58,6 +59,9 @@ class CalenderController extends GetxController {
             _trackTaped.add(target);
             selectIndex(target.index);
             for (var i = target.index - 1; i > firstValue; i--) {
+              selectIndex(i);
+            }
+            for (var i = target.index; i < firstValue; i++) {
               selectIndex(i);
             }
 

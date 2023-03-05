@@ -11,10 +11,38 @@ class initEventController extends GetxController {
   int maxIdx = 0;
   RxInt dayIdx = 0.obs; // 클릭한 날짜 인덱스
   RxList selectedIdx = [].obs;
+  RxInt dayCount = 0.obs;
+  RxInt eveningCount = 0.obs;
+  RxInt nightCount = 0.obs;
+  RxInt offCount = 0.obs;
 
   @override
   void onInit() {
     setFirst(2023, 2);
+  }
+
+  setCount() {
+    dayCount.value = 0;
+    eveningCount.value = 0;
+    nightCount.value = 0;
+    offCount.value = 0;
+
+    for (var i = 0 ; i<days.length; i++){
+      if (days[i]['inMonth']){
+        if (days[i]['Day'].value){
+          dayCount.value += 1;
+        }
+        else if (days[i]['Evening'].value){
+          eveningCount.value += 1;
+        }
+        else if (days[i]['Night'].value){
+          nightCount.value += 1;
+        }
+        else if (days[i]['Off'].value){
+          offCount.value += 1;
+        }
+      }
+    }
   }
 
   setFirst(int setYear, int setMonth) {

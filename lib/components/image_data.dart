@@ -20,14 +20,7 @@ class ImageData extends StatelessWidget {
 }
 
 class IconPath {
-  static String get day => 'assets/image/day.png';
-  static String get dayClick => 'assets/image/dayclick.png';
-  static String get evening => 'assets/image/ev.png';
-  static String get eveningClick => 'assets/image/evclick.png';
-  static String get night => 'assets/image/night.png';
-  static String get nightClick => 'assets/image/nightclick.png';
-  static String get off => 'assets/image/off.png';
-  static String get offClick => 'assets/image/offclick.png';
+
 
 
 }

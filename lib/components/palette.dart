@@ -11,5 +11,9 @@ class Palette{
   static const Color shadowColor = Color(0xFF909090);
   static const Color calenderColor = Color(0xFFf5917f);
   static const Color calenderSubColor = Color(0xFF7fe7f5);
+  static const Color eveningColor = Color(0xFF92FF76);
+  static const Color nightColor = Color(0xFFD0D405);
+  static const Color offColor = Color(0xFF2E56BE);
+  static const Color whitePurple = Color(0xFFDFC6E1);
 
 }
