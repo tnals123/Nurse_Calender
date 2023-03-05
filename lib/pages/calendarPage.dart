@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lol_blackbox/controller/calenderController.dart';
 import 'package:lol_blackbox/controller/initEvent.dart';
 
+import '../components/image_data.dart';
 import '../components/palette.dart';
 
 class CalenderPage extends StatelessWidget {
@@ -12,275 +13,280 @@ class CalenderPage extends StatelessWidget {
   Widget build(BuildContext context) {
     initEventController init = Get.put(initEventController());
     CalenderController calender = Get.put(CalenderController());
-    print(init.days);
-    print(init.minIdx);
-    print(init.maxIdx);
-    print("adsadadadsads");
     var level = 1;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(children: [
-          const SizedBox(
-        height: 15,
-          ),
-          Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
+      body: Column(children: [
+        Container(
+          color: Palette.calenderColor,
+          child: Column(
             children: [
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(left: 21, top: 35),
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          border: Border.all(width: 1.1, color: Colors.black),
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(left: 5, top: 50),
+                        child: Text(
+                          "Lv.${level}",
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontFamily: "paybooc",
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 15, right: 21),
+                    width: 30,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 1.1,
+                        color: Colors.black,
+                      ),
+                      color: Colors.white,
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
               Container(
-                margin: const EdgeInsets.only(left: 21, top: 35),
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                  border: Border.all(width: 1.1, color: Colors.black),
+                margin: const EdgeInsets.only(left: 21),
+                child: Row(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(top: 3, right: 5),
+                      child: const Text(
+                        "D",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: "paybooc",
+                            fontSize: 19,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Container(
+                      width: 20,
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                        // Space between underline and text
+                      ),
+                      decoration: const BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(
+                                color: Colors.amber,
+                                width: 2.0, // Underline thickness
+                              ))),
+                      child: const Center(
+                        child: Text(
+                          "4",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: "paybooc",
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(left: 40, bottom: 1, right: 5),
+                      child: const Text(
+                        "E",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: "paybooc",
+                            fontSize: 19,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Container(
+                      width: 20,
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                        // Space between underline and text
+                      ),
+                      decoration: const BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(
+                                color: Colors.amber,
+                                width: 2.0, // Underline thickness
+                              ))),
+                      child: const Center(
+                        child: Text(
+                          "23",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: "paybooc",
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(left: 40, bottom: 1, right: 5),
+                      child: const Text(
+                        "N",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: "paybooc",
+                            fontSize: 19,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Container(
+                      width: 20,
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                        // Space between underline and text
+                      ),
+                      decoration: const BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(
+                                color: Colors.amber,
+                                width: 2.0, // Underline thickness
+                              ))),
+                      child: const Center(
+                        child: Text(
+                          "10",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: "paybooc",
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(left: 40, bottom: 1, right: 5),
+                      child: const Text(
+                        "OFF",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: "paybooc",
+                            fontSize: 19,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Container(
+                      width: 20,
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                        // Space between underline and text
+                      ),
+                      decoration: const BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(
+                                color: Colors.amber,
+                                width: 2.0, // Underline thickness
+                              ))),
+                      child: const Center(
+                        child: Text(
+                          "8",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: "paybooc",
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(left: 5, top: 50),
-                child: Text(
-                  "Lv.${level}",
-                  style: const TextStyle(
-                      color: Colors.black,
-                      fontFamily: "paybooc",
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600),
-                ),
+                height: 1,
+                margin: const EdgeInsets.only(top: 10),
+                width: Get.width,
+                color: Colors.black,
               ),
             ],
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 15, right: 21),
-            width: 30,
-            height: 30,
-            decoration: BoxDecoration(
-              border: Border.all(
-                width: 1.1,
-                color: Colors.black,
-              ),
-              color: Colors.white,
-            ),
-          )
-        ],
-          ),
-          const SizedBox(
-        height: 20,
-          ),
-          Container(
-        margin: const EdgeInsets.only(left: 21),
-        child: Row(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 3, right: 5),
-              child: const Text(
-                "D",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: "paybooc",
-                    fontSize: 19,
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
-            Container(
-              width: 20,
-              padding: const EdgeInsets.only(
-                top: 10,
-                // Space between underline and text
-              ),
-              decoration: const BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                color: Colors.amber,
-                width: 2.0, // Underline thickness
-              ))),
-              child: const Center(
-                child: Text(
-                  "4",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: "paybooc",
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(left: 40, bottom: 1, right: 5),
-              child: const Text(
-                "E",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: "paybooc",
-                    fontSize: 19,
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
-            Container(
-              width: 20,
-              padding: const EdgeInsets.only(
-                top: 10,
-                // Space between underline and text
-              ),
-              decoration: const BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                color: Colors.amber,
-                width: 2.0, // Underline thickness
-              ))),
-              child: const Center(
-                child: Text(
-                  "23",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: "paybooc",
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(left: 40, bottom: 1, right: 5),
-              child: const Text(
-                "N",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: "paybooc",
-                    fontSize: 19,
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
-            Container(
-              width: 20,
-              padding: const EdgeInsets.only(
-                top: 10,
-                // Space between underline and text
-              ),
-              decoration: const BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                color: Colors.amber,
-                width: 2.0, // Underline thickness
-              ))),
-              child: const Center(
-                child: Text(
-                  "10",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: "paybooc",
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(left: 40, bottom: 1, right: 5),
-              child: const Text(
-                "OFF",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: "paybooc",
-                    fontSize: 19,
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
-            Container(
-              width: 20,
-              padding: const EdgeInsets.only(
-                top: 10,
-                // Space between underline and text
-              ),
-              decoration: const BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                color: Colors.amber,
-                width: 2.0, // Underline thickness
-              ))),
-              child: const Center(
-                child: Text(
-                  "8",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: "paybooc",
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-            ),
-          ],
         ),
+        Container(
+          height: 1,
+          margin: const EdgeInsets.only(top: 5),
+          width: Get.width,
+          color: Colors.black,
+        ),
+
+        const SizedBox(
+      height: 10,
+        ),
+        Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          color: Colors.white,
+          height: 40,
+          width: 40,
+          child: Text(
+            "${init.month}월",
+            style: const TextStyle(
+                fontFamily: "noto",
+                fontSize: 20,
+                color: Colors.black,
+                fontWeight: FontWeight.w700),
           ),
-          Container(
-        height: 1,
-        margin: const EdgeInsets.only(top: 10),
-        width: Get.width,
-        color: Colors.black,
+        ),
+      ],
+        ),
+        Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        for (var i = 0; i < init.week.length; i++)
+          Expanded(
+            child: Container(
+                color: Colors.white,
+                margin: const EdgeInsets.only(left: 10, right: 10),
+                child: i == 0
+                    ? Center(
+                        child: Text(
+                          init.week[i],
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 13,
+                              fontFamily: "noto",
+                              color: Colors.red),
+                        ),
+                      )
+                    : Center(
+                        child: Text(
+                          init.week[i],
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 13,
+                              fontFamily: "noto",
+                              color: Colors.black),
+                        ),
+                      )),
           ),
-          Container(
-        height: 1,
-        margin: const EdgeInsets.only(top: 5),
-        width: Get.width,
-        color: Colors.black,
-          ),
-          const SizedBox(
-        height: 10,
-          ),
-          Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            color: Colors.white,
-            height: 40,
-            width: 40,
-            child: Text(
-              "${init.month}월",
-              style: const TextStyle(
-                  fontFamily: "noto",
-                  fontSize: 20,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w700),
-            ),
-          ),
-        ],
-          ),
-          Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          for (var i = 0; i < init.week.length; i++)
-            Expanded(
-              child: Container(
-                  color: Colors.white,
-                  margin: const EdgeInsets.only(left: 10, right: 10),
-                  child: i == 0
-                      ? Center(
-                          child: Text(
-                            init.week[i],
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 13,
-                                fontFamily: "noto",
-                                color: Colors.red),
-                          ),
-                        )
-                      : Center(
-                          child: Text(
-                            init.week[i],
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 13,
-                                fontFamily: "noto",
-                                color: Colors.black),
-                          ),
-                        )),
-            ),
-        ],
-          ),
-          const SizedBox(
-        height: 3,
-          ),
-        Listener(
+      ],
+        ),
+        const SizedBox(
+      height: 3,
+        ),
+      Container(
+        padding: const EdgeInsets.only(left: 0.5,right: 0.5),
+        child: Listener(
           onPointerDown: calender.detectTapedItem,
           onPointerMove: calender.detectTapedItem,
           onPointerUp: calender.clearSelection,
@@ -302,15 +308,43 @@ class CalenderPage extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             bottom: 30),
                         decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 1.1,
-                            color: calender.asdf.contains(index) && calender.screenList.isEmpty
-                                ? Colors.grey
-                                : calender.asdf.isEmpty && calender.screenList.contains(index) ? Colors.grey
-                                : Colors.white,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                          color: Colors.white,
+                            border : Border(
+                                left: !calender.temporArr.contains(-1) && calender.selectedIdx.contains(index) && calender.selectedIdx.indexOf(index) == 0 ?
+                                const BorderSide( // POINT
+                                  color: Colors.grey,
+                                  width: 1.3,
+                                ) :
+                                const BorderSide( // POINT
+                                  color: Colors.white,
+                                  width: 0.0,
+                                ),
+                                right: calender.selectedIdx.contains(index) && index == calender.selectedIdx[calender.selectedIdx.length-1] ?
+                                const BorderSide( // POINT
+                                  color: Colors.grey,
+                                  width: 1.3,
+                                ) :
+                                const BorderSide( // POINT
+                                  color: Colors.white,
+                                  width: 0.0,
+                                ),
+                                bottom: calender.selectedIdx.contains(index) ?
+                                const BorderSide( // POINT
+                                  color: Colors.grey,
+                                  width: 1.3,
+                                  style: BorderStyle.solid
+                                ) : const BorderSide( // POINT
+                                  color: Colors.white,
+                                  width: 0.0,
+                                ),top: calender.selectedIdx.contains(index) ?
+                            const BorderSide( // POINT
+                              color: Colors.grey,
+                              width: 1.3,
+                            ) : const BorderSide( // POINT
+                              color: Colors.white,
+                              width: 0.0,
+                            )
+
+                            )
                         ),
                         child: Align(
                           alignment: Alignment.topCenter,
@@ -345,37 +379,33 @@ class CalenderPage extends StatelessWidget {
                       init.days[index]["inMonth"] && init.days[index]['Day'].value == true ?
                       Container(
                         margin: const EdgeInsets.only(top: 25),
-                        width: Get.width / 7,
-                        height: 8,
+                        width: Get.width / 7.1,
+                        height: 4,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
                             color: init.days[index]["inMonth"] ? Colors.blue : Colors.blue
                         ),
                       ) : init.days[index]["inMonth"] && init.days[index]['Evening'].value == true ?
                       Container(
                         margin: const EdgeInsets.only(top: 25),
-                        width: Get.width / 7,
-                        height: 8,
+                        width: Get.width / 7.1,
+                        height: 4,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
                             color: init.days[index]["inMonth"] ? Palette.mainColor : Colors.blue
                         ),
                       ) : init.days[index]["inMonth"] && init.days[index]['Night'].value == true ?
                       Container(
                         margin: const EdgeInsets.only(top: 25),
-                        width: Get.width / 7,
-                        height: 8,
+                        width: Get.width / 7.1,
+                        height: 4,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
                             color: init.days[index]["inMonth"] ? Palette.greyColor4 : Colors.blue
                         ),
                       ) : init.days[index]["inMonth"] && init.days[index]['Off'].value == true ?
                       Container(
                         margin: const EdgeInsets.only(top: 25),
-                        width: Get.width / 7,
-                        height: 8,
+                        width: Get.width / 7.1,
+                        height: 4,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
                             color: init.days[index]["inMonth"] ? Palette.greyColor2 : Colors.blue
                         ),
                       ) : Container(width: 0,)
@@ -384,175 +414,246 @@ class CalenderPage extends StatelessWidget {
               }
             ),
         ),
-          Container(
-        height: 1,
-        margin: const EdgeInsets.only(top: 10),
-        width: Get.width,
-        color: Colors.black,
-          ),
-          Obx(() => Column(
-            children: [
-              // init.days[init.dayIdx.value]['inMonth'] && init.days[init.dayIdx.value]['Day'].value ?
-              Column(
-                children: [
-                  !(init.dayIdx.value > init.maxIdx || init.dayIdx.value < init.minIdx) ?
-                      Column(
-                        children: [
-                          Container(
-                              width: Get.width,
-                              height: 40,
-                              margin: const EdgeInsets.only(top: 20, left: 21, right: 21),
-                              decoration: BoxDecoration(border:
-                              Border.all(color: Colors.black)),
-                              child:GestureDetector(
-                                onTap: () => {
-                                  if (init.dayIdx.value >init.maxIdx || init.dayIdx.value <init.minIdx){
-
-                                  }
-                                  else{
-                                    if (init.days[init.dayIdx.value]['Day'].value){
-                                      init.days[init.dayIdx.value]['Day'].value = false,
-                                      init.days[init.dayIdx.value]['Evening'].value = false,
-                                      init.days[init.dayIdx.value]['Night'].value = false,
-                                      init.days[init.dayIdx.value]['Off'].value = false,
-                                    }
-                                    else{
-                                      init.days[init.dayIdx.value]['Evening'].value = false,
-                                      init.days[init.dayIdx.value]['Night'].value = false,
-                                      init.days[init.dayIdx.value]['Off'].value = false,
-                                      init.days[init.dayIdx.value]['Day'].value = true,
-                                    }
-                                  }
-                                },
-                                child: !(init.dayIdx.value > init.maxIdx || init.dayIdx.value < init.minIdx) ?
-                                Container(
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.black),
-                                      color:
-                                      init.days[init.dayIdx.value]['Day'].value ?  Colors.blue : Palette.greyColor4
-                                  ),
-                                  alignment: Alignment.center,
-                                  child: const Text("Day"),
-                                ) : Container(width: 0,)
-                              )),
-                          Container(
-                              width: Get.width,
-                              height: 40,
-                              margin: const EdgeInsets.only(top: 20, left: 21, right: 21),
-                              decoration: BoxDecoration(border:
-                              Border.all(color: Colors.black)),
-                              child:GestureDetector(
-                                onTap: () => {
-                                  if (init.dayIdx.value >init.maxIdx || init.dayIdx.value <init.minIdx){
-
-                                  }
-                                  else{
-                                    if (init.days[init.dayIdx.value]['Evening'].value){
-                                      init.days[init.dayIdx.value]['Day'].value = false,
-                                      init.days[init.dayIdx.value]['Evening'].value = false,
-                                      init.days[init.dayIdx.value]['Night'].value = false,
-                                      init.days[init.dayIdx.value]['Off'].value = false,
-                                    }
-                                    else{
-                                      init.days[init.dayIdx.value]['Day'].value = false,
-                                      init.days[init.dayIdx.value]['Night'].value = false,
-                                      init.days[init.dayIdx.value]['Off'].value = false,
-                                      init.days[init.dayIdx.value]['Evening'].value = true,
-                                    }
-                                  }
-
-                                },
-                                child: !(init.dayIdx.value > init.maxIdx || init.dayIdx.value < init.minIdx) ?
-                                Container(
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.black),
-                                      color: init.days[init.dayIdx.value]['Evening'].value ? Palette.subColor1 : Palette.greyColor4
-                                  ),
-                                  alignment: Alignment.center,
-                                  child: const Text("Evening"),
-                                ) : Container(width: 0,)
-                              )),
-                          Container(
-                              width: Get.width,
-                              height: 40,
-                              margin: const EdgeInsets.only(top: 20, left: 21, right: 21),
-                              decoration: BoxDecoration(border:
-                              Border.all(color: Colors.black)),
-                              child:GestureDetector(
-                                onTap: () => {
-                                  if (init.dayIdx.value >init.maxIdx || init.dayIdx.value <init.minIdx){
-
-                                  }
-                                  else{
-                                    if (init.days[init.dayIdx.value]['Night'].value){
-                                      init.days[init.dayIdx.value]['Day'].value = false,
-                                      init.days[init.dayIdx.value]['Evening'].value = false,
-                                      init.days[init.dayIdx.value]['Night'].value = false,
-                                      init.days[init.dayIdx.value]['Off'].value = false,
-                                    }
-                                    else{
-                                      init.days[init.dayIdx.value]['Day'].value = false,
-                                      init.days[init.dayIdx.value]['Evening'].value = false,
-                                      init.days[init.dayIdx.value]['Off'].value = false,
-                                      init.days[init.dayIdx.value]['Night'].value = true,
-                                    }
-                                  }
-                                },
-                                child: !(init.dayIdx.value > init.maxIdx || init.dayIdx.value < init.minIdx) ?
-                                Container(
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.black),
-                                      color: init.days[init.dayIdx.value]['Night'].value ?  Palette.greyColor3 : Palette.greyColor4
-                                  ),
-                                  alignment: Alignment.center,
-                                  child: const Text("Night"),
-                                ) : Container(width: 0,)
-                              )),
-                          Container(
-                              width: Get.width,
-                              height: 40,
-                              margin: const EdgeInsets.only(top: 20, left: 21, right: 21),
-                              decoration: BoxDecoration(border:
-                              Border.all(color: Colors.black)),
-                              child:GestureDetector(
-                                onTap: () => {
-                                  if (init.dayIdx.value >init.maxIdx || init.dayIdx.value <init.minIdx){
-                                  }
-                                  else{
-                                    if (init.days[init.dayIdx.value]['Night'].value){
-                                      init.days[init.dayIdx.value]['Day'].value = false,
-                                      init.days[init.dayIdx.value]['Evening'].value = false,
-                                      init.days[init.dayIdx.value]['Night'].value = false,
-                                      init.days[init.dayIdx.value]['Off'].value = false,
-                                    }
-                                    else{
-                                      init.days[init.dayIdx.value]['Day'].value = false,
-                                      init.days[init.dayIdx.value]['Evening'].value = false,
-                                      init.days[init.dayIdx.value]['Off'].value = false,
-                                      init.days[init.dayIdx.value]['Night'].value = true,
-                                    }
-                                  }
-                                },
-                                child: !(init.dayIdx.value > init.maxIdx || init.dayIdx.value < init.minIdx) ?
-                                Container(
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.black),
-                                      color: init.days[init.dayIdx.value]['Off'].value ?  Colors.blue : Palette.greyColor4
-                                  ),
-                                  alignment: Alignment.center,
-                                  child: const Text("Off"),
-                                ) : Container(width: 0,)
-                              )),
-                        ],
-                      ) : Container()
-
-                ],
-              )
-            ],
-          ) ),
-
-        ]),
       ),
+        Container(
+      height: 1,
+      margin: const EdgeInsets.only(top: 10),
+      width: Get.width,
+      color: Colors.black,
+        ),
+        Obx(() => Expanded(
+          child: Container(
+            child: Column(
+              children: [
+                Expanded(child: Container()),
+                !(init.dayIdx.value > init.maxIdx || init.dayIdx.value < init.minIdx) ?
+                    Column(
+                      children: [
+                        Material(
+                        elevation : 20,
+                          child: Container(
+                            height: 60,
+                            color : Colors.white,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                    margin: const EdgeInsets.only(left:15),
+                                    width: 50,
+                                    height: 50,
+                                    child:GestureDetector(
+                                      onTap: () => {
+                                        if (init.dayIdx.value >init.maxIdx || init.dayIdx.value <init.minIdx){
+
+                                        }
+                                        else{
+                                          if (init.days[init.dayIdx.value]['Day'].value){
+                                            for (var i = 0 ; i<calender.selectedIdx.length; i++){
+                                              init.days[calender.selectedIdx[i]]['Day'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Evening'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Night'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Off'].value = false,
+                                            }
+                                          }
+                                          else{
+                                            for (var i = 0 ; i<calender.selectedIdx.length; i++){
+                                              init.days[calender.selectedIdx[i]]['Day'].value = true,
+                                              init.days[calender.selectedIdx[i]]['Evening'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Night'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Off'].value = false,
+                                            }
+                                          }
+                                        }
+                                      },
+                                      child: !(init.dayIdx.value > init.maxIdx || init.dayIdx.value < init.minIdx) ?
+                                      Column(
+                                        children: [
+                                          ImageData(
+                                            IconPath.day,
+                                            width: 50,
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                color:
+                                                init.days[init.dayIdx.value]['Day'].value ?  Colors.blue : Colors.white
+                                            ),
+                                            alignment: Alignment.center,
+                                            child: const Text("Day",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: "noto",
+                                              fontSize: 12
+                                            ),),
+                                          ),
+                                        ],
+                                      ) : Container(width: 0,)
+                                    )),
+                                Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(),
+                                    child:GestureDetector(
+                                      onTap: () => {
+                                        if (init.dayIdx.value >init.maxIdx || init.dayIdx.value <init.minIdx){
+
+                                        }
+                                        else{
+                                          if (init.days[init.dayIdx.value]['Evening'].value){
+                                            for (var i = 0 ; i<calender.selectedIdx.length; i++){
+                                              init.days[calender.selectedIdx[i]]['Day'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Evening'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Night'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Off'].value = false,
+                                            }
+                                          }
+                                          else{
+                                            for (var i = 0 ; i<calender.selectedIdx.length; i++){
+                                              init.days[calender.selectedIdx[i]]['Day'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Evening'].value = true,
+                                              init.days[calender.selectedIdx[i]]['Night'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Off'].value = false,
+                                            }
+                                          }
+                                        }
+
+                                      },
+                                      child: !(init.dayIdx.value > init.maxIdx || init.dayIdx.value < init.minIdx) ?
+                                      Column(
+                                        children: [
+                                          ImageData(
+                                            IconPath.evening,
+                                            width: 50,
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                color: init.days[init.dayIdx.value]['Evening'].value ? Palette.subColor1 : Colors.white
+                                            ),
+                                            alignment: Alignment.center,
+                                            child: const Text("Evening",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: "noto",
+                                                  fontSize: 12
+                                              ),),
+                                          ),
+                                        ],
+                                      ) : Container(width: 0,)
+                                    )),
+                                Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(),
+                                    child:GestureDetector(
+                                      onTap: () => {
+                                        if (init.dayIdx.value >init.maxIdx || init.dayIdx.value <init.minIdx){
+
+                                        }
+                                        else{
+                                          if (init.days[init.dayIdx.value]['Night'].value){
+                                            for (var i = 0 ; i<calender.selectedIdx.length; i++){
+                                              init.days[calender.selectedIdx[i]]['Day'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Evening'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Night'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Off'].value = false,
+                                            }
+                                          }
+                                          else{
+                                            for (var i = 0 ; i<calender.selectedIdx.length; i++){
+                                              init.days[calender.selectedIdx[i]]['Day'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Evening'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Night'].value = true,
+                                              init.days[calender.selectedIdx[i]]['Off'].value = false,
+                                            }
+                                          }
+                                        }
+                                      },
+                                      child: !(init.dayIdx.value > init.maxIdx || init.dayIdx.value < init.minIdx) ?
+                                      Column(
+                                        children: [
+                                          ImageData(
+                                            IconPath.night,
+                                            width: 50,
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                color: init.days[init.dayIdx.value]['Night'].value ?  Palette.greyColor3 : Colors.white
+
+                                            ),
+                                            alignment: Alignment.center,
+                                            child: const Text("Night",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: "noto",
+                                                  fontSize: 12
+                                              ),),
+                                          ),
+                                        ],
+                                      ) : Container(width: 0,)
+                                    )),
+                                Container(
+                                    width: 50,
+                                    height: 50,
+                                    margin: const EdgeInsets.only(right: 15),
+                                    decoration: BoxDecoration(),
+                                    child:GestureDetector(
+                                      onTap: () => {
+                                        if (init.dayIdx.value >init.maxIdx || init.dayIdx.value <init.minIdx){
+                                        }
+                                        else{
+                                          if (init.days[init.dayIdx.value]['Night'].value){
+                                            for (var i = 0 ; i<calender.selectedIdx.length; i++){
+                                              init.days[calender.selectedIdx[i]]['Day'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Evening'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Night'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Off'].value = false,
+                                            }
+                                          }
+                                          else{
+                                            for (var i = 0 ; i<calender.selectedIdx.length; i++){
+                                              init.days[calender.selectedIdx[i]]['Day'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Evening'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Night'].value = false,
+                                              init.days[calender.selectedIdx[i]]['Off'].value = true,
+                                            }
+                                          }
+                                        }
+                                      },
+                                      child: !(init.dayIdx.value > init.maxIdx || init.dayIdx.value < init.minIdx) ?
+                                      Column(
+                                        children: [
+                                          ImageData(
+                                            IconPath.off,
+                                            width: 50,
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                color: init.days[init.dayIdx.value]['Off'].value ?  Colors.blue : Colors.white
+
+                                            ),
+                                            alignment: Alignment.center,
+                                            child: const Text("Off",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: "noto",
+                                                  fontSize: 12
+                                              ),),
+                                          ),
+                                        ],
+                                      ) : Container(width: 0,)
+                                    )),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ) : Container()
+
+              ],
+            ),
+          ),
+        ) ),
+
+      ]),
     );
   }
 }

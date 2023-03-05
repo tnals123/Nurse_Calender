@@ -9,5 +9,7 @@ class Palette{
   static const Color greyColor3 = Color(0xFFD8D8D8);
   static const Color greyColor4 = Color(0xFFF6F6F6);
   static const Color shadowColor = Color(0xFF909090);
+  static const Color calenderColor = Color(0xFFf5917f);
+  static const Color calenderSubColor = Color(0xFF7fe7f5);
 
 }

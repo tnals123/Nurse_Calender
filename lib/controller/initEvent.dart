@@ -10,6 +10,7 @@ class initEventController extends GetxController {
   int minIdx = 0;
   int maxIdx = 0;
   RxInt dayIdx = 0.obs; // 클릭한 날짜 인덱스
+  RxList selectedIdx = [].obs;
 
   @override
   void onInit() {

@@ -55,6 +55,10 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
 
+  assets:
+    - assets/image/
+
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -79,21 +83,21 @@ flutter:
   fonts:
     - family: noto
       fonts:
-        - asset: lib/assets/fonts/noto/NotoSansKR-Black.otf
-        - asset: lib/assets/fonts/noto/NotoSansKR-Bold.otf
-        - asset: lib/assets/fonts/noto/NotoSansKR-Light.otf
-        - asset: lib/assets/fonts/noto/NotoSansKR-Medium.otf
-        - asset: lib/assets/fonts/noto/NotoSansKR-Regular.otf
-        - asset: lib/assets/fonts/noto/NotoSansKR-Thin.otf
+        - asset: assets/fonts/noto/NotoSansKR-Black.otf
+        - asset: assets/fonts/noto/NotoSansKR-Bold.otf
+        - asset: assets/fonts/noto/NotoSansKR-Light.otf
+        - asset: assets/fonts/noto/NotoSansKR-Medium.otf
+        - asset: assets/fonts/noto/NotoSansKR-Regular.otf
+        - asset: assets/fonts/noto/NotoSansKR-Thin.otf
 
     - family: paybooc
       fonts:
-        - asset: lib/assets/fonts/paybooc/paybooc-OTF-Light.otf
-        - asset: lib/assets/fonts/paybooc/paybooc-OTF-Bold.otf
+        - asset: assets/fonts/paybooc/paybooc-OTF-Light.otf
+        - asset: assets/fonts/paybooc/paybooc-OTF-Bold.otf
           weight: 600
-        - asset: lib/assets/fonts/paybooc/paybooc-OTF-ExtraBold.otf
+        - asset: assets/fonts/paybooc/paybooc-OTF-ExtraBold.otf
           weight: 700
-        - asset: lib/assets/fonts/paybooc/paybooc-OTF-Medium.otf
+        - asset: assets/fonts/paybooc/paybooc-OTF-Medium.otf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
