@@ -1,110 +1,186 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
+void main() => runApp(MyApp123());
 
-
-class Example extends StatelessWidget {
+class MyApp123 extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: Grid(),
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // Try running your application with "flutter run". You'll see the
+        // application has a blue toolbar. Then, without quitting the app, try
+        // changing the primarySwatch below to Colors.green and then invoke
+        // "hot reload" (press "r" in the console where you ran "flutter run",
+        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // Notice that the counter didn't reset back to zero; the application
+        // is not restarted.
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(),
     );
   }
 }
 
-class Grid extends StatefulWidget {
+class MyHomePage extends StatefulWidget {
+
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
+
+  // This class is the configuration for the state. It holds the values (in this
+  // case the title) provided by the parent (in this case the App widget) and
+  // used by the build method of the State. Fields in a Widget subclass are
+  // always marked "final".
+
   @override
-  GridState createState() {
-    return new GridState();
-  }
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-class GridState extends State<Grid> {
-  final Set<int> selectedIndexes = Set<int>();
-  final key = GlobalKey();
-  final Set<_Foo> _trackTaped = Set<_Foo>();
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
 
-  _detectTapedItem(PointerEvent event) {
-    print("dasfdasfadsfadsf");
-    final RenderBox box = key.currentContext!.findAncestorRenderObjectOfType<RenderBox>()!;
-    final result = BoxHitTestResult();
-    Offset local = box.globalToLocal(event.position);
-    if (box.hitTest(result, position: local)) {
-      for (final hit in result.path) {
-        /// temporary variable so that the [is] allows access of [index]
-        final target = hit.target;
-        if (target is _Foo && !_trackTaped.contains(target)) {
-          print("fadfadadsf");
-          _trackTaped.add(target);
-          _selectIndex(target.index);
-        }
-      }
-    }
-  }
-
-  _selectIndex(int index) {
+  void _incrementCounter() {
     setState(() {
-      print("dasfdasfadsfadsf ${index}");
-      selectedIndexes.add(index);
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      _counter++;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Listener(
-      onPointerDown: _detectTapedItem,
-      onPointerMove: _detectTapedItem,
-      onPointerUp: _clearSelection,
-      child: GridView.builder(
-        key: key,
-        itemCount: 6,
-        physics: NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          childAspectRatio: 1.0,
-          crossAxisSpacing: 5.0,
-          mainAxisSpacing: 5.0,
-        ),
-        itemBuilder: (context, index) {
-          return Foo(
-            index: index,
-            child: Container(
-              color: selectedIndexes.contains(index) ? Colors.red : Colors.blue,
-            ),
-          );
-        },
+    // This method is rerun every time setState is called, for instance as done
+    // by the _incrementCounter method above.
+    //
+    // The Flutter framework has been optimized to make rerunning build methods
+    // fast, so that you can just rebuild anything that needs updating rather
+    // than having to individually change instances of widgets.
+    return Scaffold(
+      appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
       ),
+      drawer: Drawer(
+        elevation: 16.0,
+        child: Column(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: Text("xyz"),
+              accountEmail: Text("xyz@gmail.com"),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Text("xyz"),
+              ),
+              otherAccountsPictures: <Widget>[
+                CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: Text("abc"),
+                )
+              ],
+            ),
+            ListTile(
+              title: new Text("All Inboxes"),
+              leading: new Icon(Icons.mail),
+            ),
+            Divider(
+              height: 0.1,
+            ),
+            ListTile(
+              title: new Text("Primary"),
+              leading: new Icon(Icons.inbox),
+            ),
+            ListTile(
+              title: new Text("Social"),
+              leading: new Icon(Icons.people),
+            ),
+            ListTile(
+              title: new Text("Promotions"),
+              leading: new Icon(Icons.local_offer),
+            )
+          ],
+        ),
+      ),
+      endDrawer: Drawer(
+        elevation: 16.0,
+        child: Column(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: Text("xyz"),
+              accountEmail: Text("xyz@gmail.com"),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Text("xyz"),
+              ),
+              otherAccountsPictures: <Widget>[
+                CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: Text("abc"),
+                )
+              ],
+            ),
+            ListTile(
+              title: new Text("All Inboxes"),
+              leading: new Icon(Icons.mail),
+            ),
+            Divider(
+              height: 0.1,
+            ),
+            ListTile(
+              title: new Text("Primary"),
+              leading: new Icon(Icons.inbox),
+            ),
+            ListTile(
+              title: new Text("Social"),
+              leading: new Icon(Icons.people),
+            ),
+            ListTile(
+              title: new Text("Promotions"),
+              leading: new Icon(Icons.local_offer),
+            )
+          ],
+        ),
+      ),
+      body: Center(
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
+        child: Column(
+          // Column is also a layout widget. It takes a list of children and
+          // arranges them vertically. By default, it sizes itself to fit its
+          // children horizontally, and tries to be as tall as its parent.
+          //
+          // Invoke "debug painting" (press "p" in the console, choose the
+          // "Toggle Debug Paint" action from the Flutter Inspector in Android
+          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+          // to see the wireframe for each widget.
+          //
+          // Column has various properties to control how it sizes itself and
+          // how it positions its children. Here we use mainAxisAlignment to
+          // center the children vertically; the main axis here is the vertical
+          // axis because Columns are vertical (the cross axis would be
+          // horizontal).
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
-
-  void _clearSelection(PointerUpEvent event) {
-    _trackTaped.clear();
-    setState(() {
-      selectedIndexes.clear();
-    });
-  }
-}
-
-class Foo extends SingleChildRenderObjectWidget {
-  final int index;
-
-  Foo({required Widget child, required this.index, Key? key}) : super(child: child, key: key);
-
-  @override
-  _Foo createRenderObject(BuildContext context) {
-    return _Foo(index);
-  }
-
-  @override
-  void updateRenderObject(BuildContext context, _Foo renderObject) {
-    renderObject..index = index;
-  }
-}
-
-class _Foo extends RenderProxyBox {
-  int index;
-  _Foo(this.index);
 }

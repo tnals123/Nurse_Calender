@@ -21,6 +21,25 @@ class initEventController extends GetxController {
     setFirst(2023, 2);
   }
 
+  getSchedule(int dayIdx) {
+      String schedule = '';
+        if (days[dayIdx]['Day'].value){
+          schedule =  '오전 근무시네요. 출근 시간은 Preference 이네요. \n알람은 맞추셨죠? '
+              '알람 버튼을 누르시면 출근 시간 1시간 전에 알람을 자동으로 맞춰 드릴게요!';
+        }
+        else if (days[dayIdx]['Evening'].value){
+          schedule = '오후 근무시네요. 출근 시간은 Preference 이네요. \n알람은 맞추셨죠? '
+              '알람 버튼을 누르시면 출근 시간 1시간 전에 알람을 자동으로 맞춰 드릴게요!';
+        }
+        else if (days[dayIdx]['Night'].value){
+          schedule = '밤 근무시네요. 출근 시간은 Preference 이네요. \n알람은 맞추셨죠? '
+              '알람 버튼을 누르시면 출근 시간 1시간 전에 알람을 자동으로 맞춰 드릴게요!';
+        }
+        else if (days[dayIdx]['Off'].value){
+          schedule = '오프시네요! 오늘은 편히 쉬세요.';
+      }return schedule;
+  }
+
   setCount() {
     dayCount.value = 0;
     eveningCount.value = 0;

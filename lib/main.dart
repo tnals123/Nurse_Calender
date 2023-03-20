@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.white,
             titleTextStyle: TextStyle(color: Colors.black),
           )),
-      home: const CalenderPage(),
+      home: CalenderPage(),
       // initialRoute: "/",
       getPages: [
         GetPage(

@@ -13,6 +13,7 @@ class CalenderController extends GetxController {
   RxList temporArr = [].obs;
   RxList screenList = [].obs; //실제 화면에 띄우기 위한 배열
   RxList selectedIdx = [].obs;
+  int selectedIndex = 0;
 
   void selectIndex(int index) {
     selectedIndexes.add(index);
@@ -38,6 +39,7 @@ class CalenderController extends GetxController {
     }
     _trackTaped.clear();
     selectedIndexes.clear();
+    print(selectedIndexes);
     temporArr.clear();
   }
 
