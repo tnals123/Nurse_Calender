@@ -23,6 +23,7 @@ class CalenderController extends GetxController {
     for (int i = 0; i < selectLists.length; i++) {
       temporArr.add(selectLists[i]);
     }
+    print(temporArr);
     if (index > initController.maxIdx || index < initController.minIdx){
       _trackTaped.clear();
       selectedIndexes.clear();
@@ -42,6 +43,7 @@ class CalenderController extends GetxController {
   }
 
   void detectTapedItem(PointerEvent event) {
+      print(Get.find<initEventController>().days[Get.find<initEventController>().dayIdx.value]);
       screenList.clear();
       final RenderBox box =
           key.currentContext!.findAncestorRenderObjectOfType<RenderBox>()!;

@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lol_blackbox/controller/calenderController.dart';
 import 'package:lol_blackbox/controller/initEvent.dart';
-import 'package:side_navigation/side_navigation.dart';
 
 import '../components/image_data.dart';
 import '../components/palette.dart';
@@ -247,7 +246,7 @@ class CalenderPage extends StatelessWidget {
                           Container(
                             color: Colors.transparent,
                             height: 40,
-                            width: 40,
+                            width: 50,
                             child: Text(
                               "${init.month}월",
                               style: TextStyle(
@@ -518,7 +517,7 @@ class CalenderPage extends StatelessWidget {
                               top: 5, left: 10, right: 10),
                           alignment: Alignment.topLeft,
                           child: Text(
-                              "${init.days[init.dayIdx.value]['month']}월"
+                              "${init.month}월"
                                   "${init.days[init.dayIdx.value]['day']}일은 아직 아무 일정도 정하지 않으셨네요.\n아래 버튼을 눌러 일정을 추가해보세요!",
                               style: TextStyle(
                                 fontFamily: "noto",
