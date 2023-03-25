@@ -4,11 +4,14 @@ import 'package:lol_blackbox/Utils/preference_util.dart';
 import 'package:lol_blackbox/pages/asdf.dart';
 import 'package:lol_blackbox/pages/calendarPage.dart';
 
+import 'Utils/AppLifeCycle.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PreferenceUtils.init();
   runApp(const MyApp());
+  WidgetsBinding.instance.addObserver(MyWidgetsBindingObserver());
 }
 
 class MyApp extends StatelessWidget {

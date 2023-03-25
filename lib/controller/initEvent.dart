@@ -25,27 +25,24 @@ class initEventController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    print("프리퍼런스 사용");
     if (PreferenceUtils.getPreference() == "true"){
+      print("프리퍼런스 사용");
       var temporList = [];
       var date = DateFormat('yyyy-MM-dd').format(now);
       setFirstWithPre(int.parse(date.split("-")[0]), int.parse(date.split("-")[1]));
-      List<User> userList;
-      userList=(json.decode(PreferenceUtils.getSchedule()!) as List).map((i) =>
-          User.fromJson(i)).toList();
-      for (var i = 0 ; i<userList.length; i++){
-        var temporJson = {};
-        temporJson['year'] = userList[i].year;
-        temporJson['day'] = userList[i].day;
-        temporJson['inMonth'] = userList[i].inMonth;
-        temporJson['isToday'] = userList[i].isToday;
-        temporJson['Day'] = userList[i].Day.obs;
-        temporJson['Evening'] = userList[i].Evening.obs;
-        temporJson['Night'] = userList[i].Night.obs;
-        temporJson['Off'] = userList[i].Off.obs;
-        temporList.add(temporJson);
+      print("asdasd");
+      print(jsonDecode(PreferenceUtils.getSchedule()!));
+      List<dynamic> preFerenceArray = jsonDecode(PreferenceUtils.getSchedule()!);
+      for(var i = 0 ; i<preFerenceArray.length; i++){
+        print(preFerenceArray[i]["Day"]);
+        preFerenceArray[i]["Day"] = RxBool(preFerenceArray[i]["Day"]);
+        preFerenceArray[i]["Evening"] = RxBool(preFerenceArray[i]["Evening"]);
+        preFerenceArray[i]["Night"] = RxBool(preFerenceArray[i]["Night"]);
+        preFerenceArray[i]["Off"] = RxBool(preFerenceArray[i]["Off"]);
       }
-      days = temporList.obs;
+
+      days = preFerenceArray.obs;
+
 
       for (int i = 0 ; i<days.length; i++){
         if (days[i]["inMonth"] == true){
@@ -61,41 +58,14 @@ class initEventController extends GetxController {
           break;
         }
       }
-
-
-      print(days);
     }
     else{
-      print(jsonDecode(PreferenceUtils.getSchedule()!.length.toString()));
+      print("앙ㅁ닐ㄴㄹ");
       DateTime now = DateTime.now();
       var date = DateFormat('yyyy-MM-dd').format(now);
+      print("zxczcxxzcv");
       setFirst(int.parse(date.split("-")[0]), int.parse(date.split("-")[1]));
-      List tem = [...days];
-      List preferenceArray = [];
-      for (var i = 0 ; i<tem.length; i++){
-        var temporJson = {
-          "year": tem[i]["year"],
-          "month": tem[i]["month"],
-          "day": tem[i]["day"],
-          "inMonth": tem[i]["inMonth"],
-          "isToday" : tem[i]["isToday"],
-          "Day" : tem[i]["Day"].value,
-          "Evening" : tem[i]["Evening"].value,
-          "Night" : tem[i]["Night"].value,
-          "Off" : tem[i]["Off"].value
-        };
-        preferenceArray.add(temporJson);
-      }
-      try{
-        PreferenceUtils.setSchedule(preferenceArray);
-        print("넣기 성공");
-        PreferenceUtils.getSchedule();
-        PreferenceUtils.setPreference();
-      }
-      catch(e){
-        print("실패~");
-        print(e);
-      }
+      setPreference();
     }
   }
 
@@ -118,8 +88,32 @@ class initEventController extends GetxController {
       }return schedule;
   }
 
-  setPreference(index,schedule){
-    var schedule = PreferenceUtils.getSchedule()
+  setPreference(){
+    List tem = [...days];
+    List preferenceArray = [];
+    for (var i = 0 ; i<tem.length; i++){
+      var temporJson = {
+        "year": tem[i]["year"],
+        "month": tem[i]["month"],
+        "day": tem[i]["day"],
+        "inMonth": tem[i]["inMonth"],
+        "isToday" : tem[i]["isToday"],
+        "Day" : tem[i]["Day"].value,
+        "Evening" : tem[i]["Evening"].value,
+        "Night" : tem[i]["Night"].value,
+        "Off" : tem[i]["Off"].value
+      };
+      preferenceArray.add(temporJson);
+    }
+    try{
+      PreferenceUtils.setSchedule(preferenceArray);
+      print("넣기 성공");
+      PreferenceUtils.setPreference();
+    }
+    catch(e){
+      print("실패~");
+      print(e);
+    }
 
   }
 
